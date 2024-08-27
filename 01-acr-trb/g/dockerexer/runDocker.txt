@@ -1,0 +1,14 @@
+Build
+$ docker build -t docker-java-image .
+$ docker build . -t multi-stage-image
+
+Run
+$ docker run --name spring-container -p 8080:8080 docker-java-image
+$ docker run -p 8080:8080 --name multi-stage-container multi-stage-image
+
+Inside container
+$ docker exec -it spring-container bash
+$ docker exec -it multi-stage-container bash
+
+Run Docker Compose
+docker-compose up -d

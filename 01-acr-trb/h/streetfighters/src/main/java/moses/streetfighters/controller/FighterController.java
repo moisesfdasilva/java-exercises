@@ -15,9 +15,14 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import moses.streetfighters.controller.dto.FighterCreationDto;
+import moses.streetfighters.controller.dto.FighterDetailCreationDto;
+import moses.streetfighters.controller.dto.FighterDetailDto;
 import moses.streetfighters.controller.dto.FighterDto;
 import moses.streetfighters.entity.Fighter;
+import moses.streetfighters.exception.FighterDetailNotFoundException;
 import moses.streetfighters.exception.FighterNotFoundException;
+import moses.streetfighters.exception.GameNotFoundException;
+import moses.streetfighters.exception.PublisherNotFoundException;
 import moses.streetfighters.service.FighterService;
 
 @RestController
@@ -66,6 +71,64 @@ public class FighterController {
   public FighterDto deleteFighterById(@PathVariable Long id) throws FighterNotFoundException {
     return FighterDto.fromEntity(
       fighterService.deleteById(id)
+    );
+  }
+
+  @PostMapping("/{fighterId}/detail")
+  @ResponseStatus(HttpStatus.CREATED)
+  public FighterDetailDto createFighterDetail(@PathVariable Long fighterId,
+      @RequestBody FighterDetailCreationDto fighterDetailCreationDto) throws FighterNotFoundException {
+    return FighterDetailDto.fromEntity(
+      fighterService.createFighterDetail(fighterId, fighterDetailCreationDto.toEntity())
+    );
+  }
+
+  @GetMapping("/{fighterId}/detail")
+  public FighterDetailDto getFighterDetail(@PathVariable Long fighterId)
+      throws FighterNotFoundException, FighterDetailNotFoundException {
+    return FighterDetailDto.fromEntity(
+      fighterService.getFighterDetail(fighterId)
+    );
+  }
+
+  @PutMapping("/{fighterId}/detail")
+  public FighterDetailDto updateFighterDetail(@PathVariable Long fighterId,
+      @RequestBody FighterDetailCreationDto fighterDetailCreationDto)
+      throws FighterNotFoundException, FighterDetailNotFoundException {
+    return FighterDetailDto.fromEntity(
+      fighterService.updateFighterDetail(fighterId, fighterDetailCreationDto.toEntity())
+    );
+  }
+
+  @DeleteMapping("/{fighterId}/detail")
+  public FighterDetailDto removFighterDetailDto(@PathVariable Long fighterId)
+      throws FighterNotFoundException, FighterDetailNotFoundException {
+    return FighterDetailDto.fromEntity(
+      fighterService.removFighterDetail(fighterId)
+    );
+  }
+
+  @PutMapping("/{fighterId}/publisher/{publisherId}")
+  public FighterDto setFighterPublisher(@PathVariable Long fighhterId,
+    @PathVariable Long publisherId) throws FighterNotFoundException, PublisherNotFoundException {
+    return FighterDto.fromEntity(
+      fighterService.setFighterPublisher(fighhterId, publisherId)
+    );
+  }
+
+  @DeleteMapping("/{fighterId}/publisher")
+  public FighterDto removeFighterPublisher(@PathVariable Long fighterId)
+      throws FighterNotFoundException {
+    return FighterDto.fromEntity(
+      fighterService.removeFighterPublisher(fighterId)
+    );
+  }
+
+  @PutMapping("/{fighterId}/fighter/{gameId}")
+  public FighterDto addFighterGame(@PathVariable Long fightId, @PathVariable Long gameId)
+      throws FighterNotFoundException, GameNotFoundException {
+    return FighterDto.fromEntity(
+      fighterService.removeFighterGame(fightId, gameId)
     );
   }
 }

@@ -1,22 +1,29 @@
 package moses.streetfighters.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "publishers")
 public class Publisher {
-  
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
   private String name;
   private String country;
 
-  public Publisher(){
+  @OneToMany(mappedBy = "publisher")
+  private List<Fighter> fighters;
+
+  public Publisher() {
   }
 
   public Publisher(String name, String country) {
@@ -46,5 +53,13 @@ public class Publisher {
 
   public void setCountry(String country) {
     this.country = country;
+  }
+
+  public List<Fighter> getFighters() {
+    return fighters;
+  }
+
+  public void setFighters(List<Fighter> fighters) {
+    this.fighters = fighters;
   }
 }

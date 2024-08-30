@@ -2,6 +2,7 @@
 services:
 
   mysql:
+    container_name: steetfighters-db
     image: mysql:8.0.32
     restart: always
     ports:
@@ -9,16 +10,5 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
 
-# docker compose up -d
-
-# services:
-
-#   mysql:
-#     container_name: ecommerce-db
-#     image: mysql:8.0.32
-#     restart: always
-#     ports:
-#       - 3306:3306
-#     environment:
-#       MYSQL_ROOT_PASSWORD: root
-#       MYSQL_DATABASE: ecommerce
+# $ docker compose up -d
+# $ mvn spring-boot:run

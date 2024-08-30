@@ -1,4 +1,4 @@
-package moses.streetfighters;
+package moses.streetfighters.entityTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -16,12 +16,11 @@ public class FighterTest {
 	@Autowired
 	FighterRepository fighterRepository;
 
+	// Test needs to run database and spring application, so it is writing into database.
 	@Test
 	public void testFighterCreation() {
-		// game Street Fighter II
-		// name Vega
 		Fighter fighter = new Fighter();
-		fighter.setName("Vega");
+		fighter.setName("Geki I (test)");
 		fighter.setGender("male");
 		fighter.setDetails(null);
 		fighter.setGames(null);

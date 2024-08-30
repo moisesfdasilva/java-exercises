@@ -49,7 +49,7 @@ public class FighterService {
   }
 
   public Fighter update(Long id, Fighter fighter) throws FighterNotFoundException {
-      Fighter fighterFromDb = findById(id);
+    Fighter fighterFromDb = findById(id);
     fighterFromDb.setName(fighter.getName());
     fighterFromDb.setGender(fighter.getGender());
 

@@ -135,7 +135,11 @@ public class FighterService {
     Fighter fighter = findById(fighterId);
     Game game = gameService.findById(gameId);
 
-    fighter.getGames().add(game);
+    if (fighter.getGames() == null) {
+      fighter.setGames(List.of(game));
+    } else {
+      fighter.getGames().add(game);
+    }
 
     return fighterRepository.save(fighter);
   }

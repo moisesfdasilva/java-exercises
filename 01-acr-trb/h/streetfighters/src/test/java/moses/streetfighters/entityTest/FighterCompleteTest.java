@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import moses.streetfighters.entity.Fighter;
 import moses.streetfighters.entity.FighterDetail;
@@ -24,6 +25,7 @@ import moses.streetfighters.repository.PublisherRepository;
  * 
  */
 @SpringBootTest
+@ActiveProfiles("test")
 public class FighterCompleteTest {
 
 	@Autowired
@@ -82,12 +84,12 @@ public class FighterCompleteTest {
 
 		fighter1 = fighterRepository.findById(savedFighter1.getId()).orElseThrow();
 		fighter1.setPublisher(savedPublisher);
-		fighter1.setGames(List.of(game1));
+		fighter1.setGames(List.of(game1, game2));
 		savedFighter1 = fighterRepository.save(fighter1);
 
 		fighter2 = fighterRepository.findById(savedFighter2.getId()).orElseThrow();
 		fighter2.setPublisher(savedPublisher);
-		fighter2.setGames(List.of(game1, game2));
+		fighter2.setGames(List.of(game2));
 		savedFighter2 = fighterRepository.save(fighter2);
 
 		assertNotNull(savedFighter1.getId());
@@ -131,12 +133,12 @@ public class FighterCompleteTest {
 		);
 
 		assertEquals(
-			List.of(savedGame1.getId()),
+			List.of(savedGame1.getId(), savedGame2.getId()),
 			savedFighter1.getGames().stream().map(Game::getId).toList()
 		);
 
 		assertEquals(
-			List.of(savedGame1.getId(), savedGame2.getId()),
+			List.of(savedGame2.getId()),
 			savedFighter2.getGames().stream().map(Game::getId).toList()
 		);
 	}

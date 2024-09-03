@@ -15,14 +15,15 @@ public record FighterDto(
     PublisherDto publisherDto = fighter.getPublisher() != null ?
       PublisherDto.fromEntity(fighter.getPublisher()) : null;
 
+    List<GameDto> gamesDto = fighter.getGames() != null ?
+      fighter.getGames().stream().map(GameDto::fromEntity).toList() : null;
+
     return new FighterDto(
       fighter.getId(),
       fighter.getName(),
       fighter.getGender(),
       publisherDto,
-      fighter.getGames().stream()
-        .map(GameDto::fromEntity)
-        .toList()
+      gamesDto
     );
   }
 }

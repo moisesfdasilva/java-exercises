@@ -63,7 +63,7 @@ public class PublisherController {
   }
 
   @DeleteMapping("/{id}")
-  public PublisherDto deleteGameById(@PathVariable Long id) throws PublisherNotFoundException {
+  public PublisherDto deletePublisherById(@PathVariable Long id) throws PublisherNotFoundException {
     return PublisherDto.fromEntity(
       publisherService.deleteById(id)
     );

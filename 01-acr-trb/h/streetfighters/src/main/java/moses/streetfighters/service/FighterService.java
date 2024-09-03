@@ -1,5 +1,7 @@
 package moses.streetfighters.service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -136,7 +138,7 @@ public class FighterService {
     Game game = gameService.findById(gameId);
 
     if (fighter.getGames() == null) {
-      fighter.setGames(List.of(game));
+      fighter.setGames(new ArrayList<Game>(Arrays.asList(game)));
     } else {
       fighter.getGames().add(game);
     }

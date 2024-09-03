@@ -128,6 +128,14 @@ public class FighterController {
   public FighterDto addFighterGame(@PathVariable Long fightId, @PathVariable Long gameId)
       throws FighterNotFoundException, GameNotFoundException {
     return FighterDto.fromEntity(
+      fighterService.addFighterGame(fightId, gameId)
+    );
+  }
+
+  @DeleteMapping("/{fighterId}/fighter/{gameId}")
+  public FighterDto removeFighterGame(@PathVariable Long fightId, @PathVariable Long gameId)
+      throws FighterNotFoundException, GameNotFoundException {
+    return FighterDto.fromEntity(
       fighterService.removeFighterGame(fightId, gameId)
     );
   }

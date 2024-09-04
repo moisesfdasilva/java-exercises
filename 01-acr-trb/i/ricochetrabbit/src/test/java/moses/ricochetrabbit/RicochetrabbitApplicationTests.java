@@ -1,0 +1,13 @@
+package moses.ricochetrabbit;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class RicochetrabbitApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}

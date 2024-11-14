@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Atividade602 {
+public class Ex02 {
   public static void main(String[] args) {
     float a, b;
     Scanner scanner = new Scanner(System.in);
